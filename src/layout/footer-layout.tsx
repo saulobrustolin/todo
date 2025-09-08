@@ -1,8 +1,8 @@
 function FooterLayout() {
     return (
-        <div>
+        <footer>
             FooterLayout
-        </div>
+        </footer>
     )
 }
 
