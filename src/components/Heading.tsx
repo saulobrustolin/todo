@@ -1,8 +1,10 @@
-function Heading() {
+function Heading({ children }: { children: React.ReactNode }) {
     return (
-        <div>
-            Heading
-        </div>
+        <h1
+            className="text-4xl capitalize font-semibold text-[var(--primary-text)]"
+        >
+            {children}
+        </h1>
     )
 }
 
