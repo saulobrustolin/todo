@@ -17,7 +17,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
             className="aspect-9/16 h-screen border-r border-l relative"
         >
             <main
-                className="p-8 flex flex-col gap-2"
+                className="p-8 flex flex-col gap-4"
             >
                 {
                     pathname[pathname.length - 1] == "dashboard" ? (
