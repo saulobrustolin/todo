@@ -3,11 +3,13 @@ import Filter from "./Filter";
 
 function Helper() {
     return (
-        <div>
+        <div
+            className="flex justify-between items-center"
+        >
             <MessageCircleQuestionMark
                 className="text-[var(--contrast-color)] size-6"
             />
-            <Filter/>
+            <Filter />
         </div>
     )
 }
