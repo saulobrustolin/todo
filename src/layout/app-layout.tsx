@@ -1,7 +1,16 @@
-function AppLayout() {
+import FooterLayout from "./footer-layout";
+
+function AppLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div>
-            App Layout
+        <div
+            className="aspect-9/16 h-screen border-r border-l relative"
+        >
+            <main
+                className="p-8"
+            >
+                {children}
+            </main>
+            <FooterLayout />
         </div>
     )
 }

@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
-
 function Anchor({ to, children }: { to: string, children: React.ReactNode }) {
     return (
-        <Link
-            to={to}
+        <a
+            href={to}
+            className="flex flex-col gap-2 justify-center items-center py-4"
         >
             {children}
-        </Link>
+        </a>
     )
 }
 
