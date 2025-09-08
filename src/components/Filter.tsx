@@ -1,6 +1,8 @@
 function Filter() {
     return (
-        <div>
+        <div
+            className="cursor-pointer border-2 p-2 rounded"
+        >
             filter
         </div>
     )
