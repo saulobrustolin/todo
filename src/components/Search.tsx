@@ -11,7 +11,7 @@ function Search() {
             <input 
                 id="search-value"
                 type="text"
-                className="w-full focus:outline-0" 
+                className="w-full focus:outline-0 text-lg" 
                 placeholder="Digite o nome da lista" 
             />
         </div>
