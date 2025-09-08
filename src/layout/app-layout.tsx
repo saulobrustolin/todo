@@ -2,6 +2,7 @@ import { useLocation } from "react-router";
 import FooterLayout from "./footer-layout";
 import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
+import { ChevronLeft } from "lucide-react";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
     const [pathname, setPathname] = useState<string[]>([]);
@@ -11,10 +12,6 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         setPathname(location.pathname.split('/').filter((value: string) => value != ""))
     }, [location.pathname])
 
-    useEffect(() => {
-        console.log(pathname)
-    }, [pathname])
-
     return (
         <div
             className="aspect-9/16 h-screen border-r border-l relative"
@@ -23,12 +20,17 @@ function AppLayout({ children }: { children: React.ReactNode }) {
                 className="p-8"
             >
                 {
-                    pathname.length == 1 ? (
+                    pathname[pathname.length - 1] == "dashboard" ? (
                         <Heading>
                             {pathname[0]}
                         </Heading>
                     ) : (
-                        <div></div>
+                        <div
+                            className="flex gap-4 items-center text-lg font-semibold"
+                        >
+                            <ChevronLeft />
+                            Voltar
+                        </div>
                     )
                 }
                 {children}
