@@ -1,8 +1,10 @@
+import Search from "../components/Search";
+
 function Dashboard() {
     return (
-        <div>
-            Dashboard
-        </div>
+        <>
+            <Search></Search>
+        </>
     )
 }
 
