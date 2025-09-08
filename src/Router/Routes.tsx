@@ -4,12 +4,14 @@ import ProtectedRoute from "../middleware/auth";
 import Dashboard from "../pages/dashboard";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
+import New from "../pages/new";
 
 function Router() {
   const routes = [
     { path: "/login", element: <Login />, layout: false, isProtected: false },
     { path: "/register", element: <Register />, layout: false, isProtected: false },
     { path: "/dashboard", element: <Dashboard />, layout: true, isProtected: true },
+    { path: "/new", element: <New />, layout: true, isProtected: true },
   ];
 
   return (
