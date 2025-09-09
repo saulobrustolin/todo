@@ -12,6 +12,7 @@ function Router() {
     { path: "/register", element: <Register />, layout: false, isProtected: false },
     { path: "/dashboard", element: <Dashboard />, layout: true, isProtected: true },
     { path: "/new", element: <New />, layout: true, isProtected: true },
+    { path: "/reset-password", element: <New />, layout: false, isProtected: false },
   ];
 
   return (
