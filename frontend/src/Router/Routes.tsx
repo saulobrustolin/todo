@@ -5,12 +5,14 @@ import Dashboard from "../pages/dashboard";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
 import New from "../pages/new";
+import ListPage from "../pages/list";
 
 function Router() {
   const routes = [
     { path: "/login", element: <Login />, layout: false, isProtected: false },
     { path: "/register", element: <Register />, layout: false, isProtected: false },
     { path: "/dashboard", element: <Dashboard />, layout: true, isProtected: true },
+    { path: "/list/:id", element: <ListPage />, layout: true, isProtected: true },
     { path: "/new", element: <New />, layout: true, isProtected: true },
     { path: "/reset-password", element: <New />, layout: false, isProtected: false },
   ];
