@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Skeleton from "../components/Skeleton";
+import ItemTask from "../components/ItemTask";
+import Collection from "../components/Collection";
 
 export type TaskProps = {
     id: number,
@@ -37,23 +39,26 @@ function ListPage() {
     }, [])   
 
     return (
-        <>
+        <Collection>
             {
                 !loading ? (
                     tasks ? (
-                        tasks.map((value: any, index: number) => {
+                        tasks.map((value: TaskProps, index: number) => {
                             return (
-                                <div
+                                <ItemTask
                                     key={index}
-                                >
-                                    {value.title}
-                                </div>
+                                    title={value.title}
+                                    subtitle={value.subtitle}
+                                    description={value.description}
+                                    finish={value.finish}
+                                    id={value.id}
+                                />
                             )
                         })
                     ) : <span>{error}</span>
                 ) : <Skeleton className="w-full h-16" />
             }
-        </>
+        </Collection>
     )
 }
 
