@@ -3,7 +3,8 @@ import { useParams } from "react-router";
 import Skeleton from "../components/Skeleton";
 import ItemTask from "../components/ItemTask";
 import Collection from "../components/Collection";
-import { Inbox } from "lucide-react";
+import { Inbox, Plus } from "lucide-react";
+import Modal from "../components/Modal";
 
 export type TaskProps = {
     id: number,
@@ -23,6 +24,8 @@ function ListPage() {
     const [error, setError] = useState();
     const [loading, setLoading] = useState<boolean>(true);
 
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
     useEffect(() => {
         const loadList = async () => {
             try {
@@ -37,40 +40,62 @@ function ListPage() {
             }
         }
         loadList();
-    }, [])   
+    }, [])
+
+    const createTask = () => {
+        setIsOpen((prev: boolean) => !prev)
+    };
 
     return (
-        <Collection
-            className="relative"
-        >
+        <>
+            <Collection>
+                {
+                    !loading ? (
+                        tasks && tasks.length != 0 ? (
+                            tasks.map((value: TaskProps, index: number) => {
+                                return (
+                                    <ItemTask
+                                        key={index}
+                                        title={value.title}
+                                        subtitle={value.subtitle}
+                                        description={value.description}
+                                        finish={value.finish}
+                                        id={value.id}
+                                    />
+                                )
+                            })
+                        ) : tasks.length == 0 ? (
+                                <span
+                                    className="fixed top-1/2 left-1/2 flex flex-col items-center gap-2 text-[var(--contrast-color)] translate-x-[-50%] translate-y-[-50%]"
+                                >
+                                    <Inbox
+                                        className="size-24 text-[var(--contrast-color)]"
+                                    />
+                                    <span>
+                                        Sem dados até o momento.
+                                    </span>
+                                </span>
+                            ) : <span>{error}</span>
+                    ) : <Skeleton className="w-full h-16" />
+                }
+            </Collection>
+            <span
+                className="absolute bottom-28 right-8 border-2 p-2 px-4 flex gap-1 rounded cursor-pointer scale-100 hover:text-[var(--contrast-color)]"
+                onClick={createTask}
+            >
+                <Plus />
+                Criar tarefa
+            </span>
+
+            {/* Construção do modal */}
             {
-                !loading ? (
-                    tasks && tasks.length != 0 ? (
-                        tasks.map((value: TaskProps, index: number) => {
-                            return (
-                                <ItemTask
-                                    key={index}
-                                    title={value.title}
-                                    subtitle={value.subtitle}
-                                    description={value.description}
-                                    finish={value.finish}
-                                    id={value.id}
-                                />
-                            )
-                        })
-                    ) : <span
-                            className="fixed top-1/2 left-1/2 flex flex-col items-center gap-2 text-[var(--contrast-color)] translate-x-[-50%] translate-y-[-50%]"
-                        >
-                            <Inbox
-                                className="size-24 text-[var(--contrast-color)]"
-                            />
-                            <span>
-                                Sem dados até o momento.
-                            </span>
-                        </span>
-                ) : <Skeleton className="w-full h-16" />
+                isOpen ? (
+                    <Modal>
+
+                    </Modal>
+                ) : null
             }
-        </Collection>
+        </>
     )
 }
 
