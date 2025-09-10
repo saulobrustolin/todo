@@ -11,3 +11,7 @@ type ListProps = {
     updated_at: string,
     user_id: number
 }
+
+type TaskProps = {
+    
+}
