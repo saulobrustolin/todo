@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import FooterLayout from "./footer-layout";
 import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
@@ -11,6 +11,11 @@ function AppLayout({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         setPathname(location.pathname.split('/').filter((value: string) => value != ""))
     }, [location.pathname])
+
+    const navigate = useNavigate();
+    const handlePage = () => {
+        navigate('/dashboard')
+    };
 
     return (
         <div
@@ -26,7 +31,8 @@ function AppLayout({ children }: { children: React.ReactNode }) {
                         </Heading>
                     ) : (
                         <div
-                            className="flex gap-4 items-center text-lg font-semibold"
+                            className="flex gap-4 items-center text-lg font-semibold cursor-pointer"
+                            onClick={handlePage}
                         >
                             <ChevronLeft />
                             Voltar

@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function ItemTask({ title, subtitle, description, finish, id }: { title: string, subtitle: string, description?: string, finish: boolean, id: number }) {
     const [finishState, setFinishState] = useState<boolean>(finish);
+    const [error, setError] = useState("");
 
     function changeFinishTask(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
@@ -28,7 +29,7 @@ function ItemTask({ title, subtitle, description, finish, id }: { title: string,
             const res = await fetch(`${apiUrl}/tasks/${id}`, options);
             const data = await res.json();
         } catch (err) {
-            console.log(err);
+            setError("Não foi possível fazer a atualização da tarefa.");
         } finally {
 
         }
