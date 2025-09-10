@@ -1,12 +1,14 @@
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router";
 
-function ItemList({ title, subtitle }: { title: string, subtitle: string }) {
+function ItemList({ title, subtitle, id }: { title: string, subtitle: string, id: number }) {
     return (
         <div
             className="flex justify-between items-center p-2 py-4 text-lg font-semibold cursor-pointer"
         >
-            <div
+            <Link
                 className="flex flex-col scale-100 hover:scale-[102%] hover:transition-all duration-200 ease-in-out"
+                to={`/list/${id}`}
             >
                 <span>
                     {title}
@@ -20,7 +22,7 @@ function ItemList({ title, subtitle }: { title: string, subtitle: string }) {
                         </span>
                     ) : null
                 }
-            </div>
+            </Link>
             <ChevronRight />
         </div>
     )

@@ -49,6 +49,7 @@ function Dashboard() {
                                 key={value.id}
                                 title={value.title}
                                 subtitle={value.subtitle}
+                                id={value.id}
                             />
                         )
                     })
