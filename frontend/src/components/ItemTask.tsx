@@ -26,9 +26,8 @@ function ItemTask({ title, subtitle, description, finish, id }: { title: string,
             })
         }
         try {
-            const res = await fetch(`${apiUrl}/tasks/${id}`, options);
-            const data = await res.json();
-        } catch (err) {
+            await fetch(`${apiUrl}/tasks/${id}`, options);
+        } catch {
             setError("Não foi possível fazer a atualização da tarefa.");
         } finally {
 
