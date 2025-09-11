@@ -3,7 +3,7 @@ type TextareaProps = {
     label: string,
     placeholder: string,
     value?: string,
-    change?: any
+    change?: (value: string) => void
 }
 
 function Textarea({ name, label, placeholder, value, change }: TextareaProps) {
@@ -24,7 +24,7 @@ function Textarea({ name, label, placeholder, value, change }: TextareaProps) {
                 placeholder={placeholder}
                 rows={4}
                 value={value}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => change(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => change?.(e.target.value)}
             />
         </div>
     )

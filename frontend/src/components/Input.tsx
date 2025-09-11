@@ -5,7 +5,7 @@ type InputProps = {
     name: string,
     disabled?: boolean,
     value?: string,
-    change?: any
+    change?: (value: string) => void;
 }
 
 function Input({ type, label, placeholder, name, disabled=false, value, change }: InputProps) {
@@ -26,7 +26,7 @@ function Input({ type, label, placeholder, name, disabled=false, value, change }
                 className="focus:outline-0 text-lg"
                 name={name}
                 value={value}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => change(e.target.value) }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => change?.(e.target.value)}
             />
         </div>
     )
