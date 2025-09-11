@@ -23,4 +23,10 @@ export class TaskService {
         const res = await db.insert(tasksTable).values(obj).returning({ id: tasksTable.id });
         return res[0]
     }
+
+    async deleteTasks(id: string): Promise<{id: number}> {
+        const db = drizzle(process.env.DATABASE_URL!);
+        const res = await db.delete(tasksTable).where(eq(tasksTable.id, +id)).returning({ id: tasksTable.id });
+        return res[0]
+    }
 }
