@@ -17,7 +17,6 @@ export const listsTable = pgTable("lists", {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     title: varchar({ length: 255 }).notNull().unique(),
     subtitle: varchar({ length: 255 }).notNull(),
-    description: text(),
     created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
     updated_at: timestamp('updated_at', { withTimezone: true }).defaultNow().$onUpdate(() => new Date()).notNull(),
     user_id: integer('user_id').notNull(),
