@@ -1,4 +1,12 @@
-function Textarea({ name, label, placeholder }: { name: string, label: string, placeholder: string }) {
+type TextareaProps = {
+    name: string,
+    label: string,
+    placeholder: string,
+    value?: string,
+    change?: any
+}
+
+function Textarea({ name, label, placeholder, value, change }: TextareaProps) {
     return (
         <div
             className="text-black flex flex-col"
@@ -15,6 +23,8 @@ function Textarea({ name, label, placeholder }: { name: string, label: string, p
                 className="focus:outline-0 resize-none text-lg"
                 placeholder={placeholder}
                 rows={4}
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => change(e.target.value)}
             />
         </div>
     )
