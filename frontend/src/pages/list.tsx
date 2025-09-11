@@ -55,10 +55,10 @@ function ListPage() {
                 {
                     !loading ? (
                         tasks && tasks.length != 0 ? (
-                            tasks.map((value: TaskProps, index: number) => {
+                            tasks.map((value: TaskProps) => {
                                 return (
                                     <ItemTask
-                                        key={index}
+                                        key={value.id}
                                         title={value.title}
                                         subtitle={value.subtitle}
                                         description={value.description}
@@ -98,7 +98,7 @@ function ListPage() {
                     <Modal
                         title="Criando tarefa"
                         handleState={setIsOpen}
-                        url={`${apiUrl}/tasks`}
+                        url={apiUrl}
                         method="POST"
                         actionReload={loadList}
                     >
