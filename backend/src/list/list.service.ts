@@ -9,4 +9,10 @@ export class ListService {
 
     return await db.select().from(listsTable)
   }
+
+  async postLists(obj: any): Promise<any> {
+    const db = drizzle(process.env.DATABASE_URL!);
+
+    return await db.insert(listsTable).values(obj).returning({ id: listsTable.id })
+  }
 }

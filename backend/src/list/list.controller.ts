@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ListService } from './list.service';
 import { ListItems } from './type';
 
@@ -17,4 +17,11 @@ export class ListController {
     // updateList(@Param('id') id: string, @Body() body: any) {
     //     return this.listService.updateList(id, body);
     // }
+
+    @Post()
+    async postLists(
+        @Body() body: any
+    ): Promise<any> {
+        return await this.listService.postLists(body);
+    }
 }
