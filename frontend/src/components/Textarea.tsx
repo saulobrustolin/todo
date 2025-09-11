@@ -12,7 +12,7 @@ function Textarea({ name, label, placeholder }: { name: string, label: string, p
             <textarea 
                 name={name}
                 id={`${label}-${name}`}
-                className="focus:outline-0 resize-none"
+                className="focus:outline-0 resize-none text-lg"
                 placeholder={placeholder}
                 rows={4}
             />
