@@ -6,6 +6,7 @@ import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
 import New from "../pages/new";
 import ListPage from "../pages/list";
+import BaseLayout from "../layout/base-layout";
 
 function Router() {
   const routes = [
@@ -25,6 +26,8 @@ function Router() {
 
           if (isProtected) {
             el = <ProtectedRoute>{el}</ProtectedRoute>;
+          } else {
+            el = <BaseLayout>{el}</BaseLayout>
           }
 
           if (layout) {
