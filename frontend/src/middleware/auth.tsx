@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -6,8 +7,11 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
+  const context = createContext(isAuthenticated);
 
-  return children;
+  return (
+    <context.Provider value={isAuthenticated}>{children}</context.Provider>
+  );
 }
 
 export default ProtectedRoute;
