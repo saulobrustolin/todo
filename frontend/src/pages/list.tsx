@@ -5,6 +5,8 @@ import ItemTask from "../components/ItemTask";
 import Collection from "../components/Collection";
 import { Inbox, Plus } from "lucide-react";
 import Modal from "../components/Modal";
+import Input from "../components/Input";
+import Textarea from "../components/Textarea";
 
 export type TaskProps = {
     id: number,
@@ -90,8 +92,27 @@ function ListPage() {
             {/* Construção do modal */}
             {
                 isOpen ? (
-                    <Modal>
-
+                    <Modal
+                        title="Criando tarefa"
+                        handleState={setIsOpen}
+                        url={`${apiUrl}/tasks`}
+                        method="POST"
+                    >
+                        <Input 
+                            label="título"
+                            placeholder="digite o título da tarefa..."
+                            name="title"
+                        />
+                        <Input 
+                            label="subtítulo"
+                            placeholder="digite o subtítulo da tarefa..."
+                            name="subtitle"
+                        />
+                        <Textarea
+                            label="descrição"
+                            name="description"
+                            placeholder="digite a descrição da tarefa (opcional)"
+                        />
                     </Modal>
                 ) : null
             }
