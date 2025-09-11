@@ -28,23 +28,24 @@ function ListPage() {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    useEffect(() => {
-        const loadList = async () => {
-            try {
-                const res = await fetch(`${apiUrl}/tasks/${id}`);
-                if (!res.ok) throw new Error("Erro na requisição");
-                const data = await res.json();
-                setTasks(data["data"]);
-            } catch (err: any) {
-                if (err.name !== "AbortError") setError(err.message)
-            } finally {
-                setLoading(false);
-            }
+    const loadList = async () => {
+        try {
+            const res = await fetch(`${apiUrl}/tasks/${id}`);
+            if (!res.ok) throw new Error("Erro na requisição");
+            const data = await res.json();
+            setTasks(data["data"]);
+        } catch (err: any) {
+            if (err.name !== "AbortError") setError(err.message)
+        } finally {
+            setLoading(false);
         }
+    }
+
+    useEffect(() => {
         loadList();
     }, [])
 
-    const createTask = () => {
+    const openModalTask = () => {
         setIsOpen((prev: boolean) => !prev)
     };
 
@@ -63,6 +64,8 @@ function ListPage() {
                                         description={value.description}
                                         finish={value.finish}
                                         id={value.id}
+                                        actionReload={loadList}
+                                        url={apiUrl}
                                     />
                                 )
                             })
@@ -83,7 +86,7 @@ function ListPage() {
             </Collection>
             <span
                 className="absolute bottom-28 right-8 border-2 p-2 px-4 flex gap-1 rounded cursor-pointer scale-100 hover:text-[var(--contrast-color)]"
-                onClick={createTask}
+                onClick={openModalTask}
             >
                 <Plus />
                 Criar tarefa
@@ -97,7 +100,13 @@ function ListPage() {
                         handleState={setIsOpen}
                         url={`${apiUrl}/tasks`}
                         method="POST"
+                        actionReload={loadList}
                     >
+                        <Input 
+                            disabled={true}
+                            name="list_id"
+                            value={id}
+                        />
                         <Input 
                             label="título"
                             placeholder="digite o título da tarefa..."
