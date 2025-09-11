@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Param, Body } from '@nestjs/common';
+import { Controller, Get, Patch, Param, Body, Post } from '@nestjs/common';
 import { TaskService } from './task.service';
 
 @Controller('api/tasks')
@@ -20,5 +20,12 @@ export class TaskController {
         return {
             "data": await this.taskService.patchTasks(id, body),
         };
+    }
+
+    @Post()
+    async postTasks(
+        @Body() body: any
+    ): Promise<any> {
+        return await this.taskService.postTasks(body);
     }
 }

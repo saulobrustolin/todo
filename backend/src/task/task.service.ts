@@ -17,4 +17,10 @@ export class TaskService {
         const res = await db.update(tasksTable).set(obj).where(eq(tasksTable.id, +id)).returning({ id: tasksTable.id });
         return res[0]
     }
+
+    async postTasks(obj: any): Promise<{id: number}> {
+        const db = drizzle(process.env.DATABASE_URL!);
+        const res = await db.insert(tasksTable).values(obj).returning({ id: tasksTable.id });
+        return res[0]
+    }
 }
