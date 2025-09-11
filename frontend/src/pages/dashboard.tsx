@@ -55,7 +55,7 @@ function Dashboard() {
                     })
                 ) : (
                     <Skeleton 
-                        className="w-full h-16"
+                        className="w-full h-12"
                     />
                 )
             }
