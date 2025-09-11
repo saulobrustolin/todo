@@ -1,7 +1,17 @@
-function Input({ type, label, placeholder, name }: { type?: string, label: string, placeholder: string, name: string }) {
+type InputProps = {
+    type?: string,
+    label?: string,
+    placeholder?: string,
+    name: string,
+    disabled?: boolean,
+    value?: string,
+    change?: any
+}
+
+function Input({ type, label, placeholder, name, disabled=false, value, change }: InputProps) {
     return (
         <div
-            className="text-black flex flex-col"
+            className={"text-black flex flex-col " + (disabled ? "hidden" : "")}
         >
             <label 
                 htmlFor={`${label}-${type}`}
@@ -15,6 +25,8 @@ function Input({ type, label, placeholder, name }: { type?: string, label: strin
                 placeholder={placeholder}
                 className="focus:outline-0 text-lg"
                 name={name}
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => change(e.target.value) }
             />
         </div>
     )
