@@ -24,7 +24,7 @@ function Modal({ className, title, children, handleState, url, method, actionRel
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const res = await fetch(`${url}/tasks/${id}`, {
+            const res = await fetch(`${url}/tasks`, {
                 method: method,
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,9 +49,14 @@ function Modal({ className, title, children, handleState, url, method, actionRel
         event.preventDefault();
 
         try {
-            await fetch(`${url}/tasks/${id}`, {
+            const res = await fetch(`${url}/tasks/${id}`, {
                 method: 'DELETE',
             })
+
+            if (res.ok) {
+                handleState(prev => !prev);
+                actionReload();
+            }
         } catch (err: any) {
             console.error(err.message)
         }
@@ -59,7 +64,7 @@ function Modal({ className, title, children, handleState, url, method, actionRel
 
     return (
         <div
-            className="bg-[var(--background-dark)]/75 w-full h-screen absolute top-0 left-0"
+            className="bg-[var(--background-dark)]/75 z-20 w-full h-screen absolute top-0 left-0"
         >
             {
                 !confirm ? (
