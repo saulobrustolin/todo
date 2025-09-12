@@ -109,9 +109,9 @@ function ItemTask({ title, subtitle, description, finish, id, actionReload, url 
                         id={id}
                     >
                         <Input 
-                            disabled={true}
                             name="list_id"
                             value={id.toString()}
+                            className="hidden"
                         />
                         <Input 
                             label="título"
