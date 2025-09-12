@@ -14,7 +14,7 @@ type InputProps = {
 function Input({ type='text', label, placeholder, name, disabled=false, value, change, className, children, required=false }: InputProps) {
     return (
         <div
-            className={"text-black flex flex-col gap-2 w-full" + (disabled ? "hidden" : "")}
+            className={"text-black flex flex-col gap-2 w-full " + (disabled ? "hidden" : "")}
         >
             {
                 label ? (
