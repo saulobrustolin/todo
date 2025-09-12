@@ -6,13 +6,15 @@ type InputProps = {
     disabled?: boolean,
     value?: string,
     change?: (value: string) => void,
-    className?: string
+    className?: string,
+    children?: React.ReactNode,
+    required?: boolean
 }
 
-function Input({ type, label, placeholder, name, disabled=false, value, change, className }: InputProps) {
+function Input({ type='text', label, placeholder, name, disabled=false, value, change, className, children, required=false }: InputProps) {
     return (
         <div
-            className={"text-black flex flex-col " + (disabled ? "hidden" : "")}
+            className={"text-black flex flex-col gap-2 w-full" + (disabled ? "hidden" : "")}
         >
             {
                 label ? (
@@ -24,15 +26,21 @@ function Input({ type, label, placeholder, name, disabled=false, value, change, 
                     </label>
                 ) : null
             }
-            <input 
-                id={`${label}-${type}`} 
-                type={type ? type : "text"} 
-                placeholder={placeholder}
-                className={className ? className : "focus:outline-0 text-lg"}
-                name={name}
-                value={value}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => change?.(e.target.value)}
-            />
+            <div
+                className="w-full grid grid-cols-[1fr_auto]"
+            >
+                <input 
+                    id={`${label}-${type}`} 
+                    type={type} 
+                    placeholder={placeholder}
+                    className={className ? className : "focus:outline-0 text-lg"}
+                    name={name}
+                    value={value}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => change?.(e.target.value)}
+                    required={required}
+                />
+                {children}
+            </div>
         </div>
     )
 }
