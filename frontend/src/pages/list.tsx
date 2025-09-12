@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import Skeleton from "../components/Skeleton";
 import ItemTask from "../components/ItemTask";
 import Collection from "../components/Collection";
-import { Inbox, Plus } from "lucide-react";
+import { Inbox, Plus, Trash } from "lucide-react";
 import Modal from "../components/Modal";
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
@@ -27,6 +27,7 @@ function ListPage() {
     const [loading, setLoading] = useState<boolean>(true);
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
 
     const loadList = async () => {
         try {
@@ -48,6 +49,10 @@ function ListPage() {
     const openModalTask = () => {
         setIsOpen((prev: boolean) => !prev)
     };
+
+    const deleteList = async () => {
+        if (!confirmDelete) setConfirmDelete(true)
+    }
 
     return (
         <>
@@ -92,6 +97,31 @@ function ListPage() {
                 Criar tarefa
             </span>
 
+            <span
+                className="absolute top-8.5 text-lg right-8 rounded font-bold text-red-500 cursor-pointer"
+                onClick={deleteList}
+            >
+                Excluir lista
+            </span>
+
+            {
+                confirmDelete ? (
+                    <Modal
+                        title="Deletar lista"
+                        handleState={setConfirmDelete}
+                        url={apiUrl}
+                        method="POST"
+                        actionReload={loadList}
+                    >
+                        <p
+                            className="text-[#222]"
+                        >
+                            Deseja mesmo deletar esta lista?
+                        </p>
+                    </Modal>
+                ) : null
+            }
+
             {/* Construção do modal */}
             {
                 isOpen ? (
@@ -103,7 +133,7 @@ function ListPage() {
                         actionReload={loadList}
                     >
                         <Input 
-                            disabled={true}
+                            className="hidden"
                             name="list_id"
                             value={id}
                         />
